@@ -1,1 +1,2 @@
-COPY ./init.sql /docker-entrypoint-initdb.d/
+CREATE DATABASE airflow;
+GRANT ALL PRIVILEGES ON DATABASE airflow TO admin;

@@ -1,0 +1,69 @@
+version: '3.9'
+
+services:
+
+  postgresql:
+    container_name: snatcher_psql_db
+    env_file:
+      - ../.env
+    restart: on-failure
+    build:
+      context: ..
+      dockerfile: ./infra/psql_db/Dockerfile
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER="${PSQL_USER}"
+      - POSTGRES_PASSWORD="${PSQL_PWD}"
+      - POSTGRES_DB="${PSQL_DB}"
+    volumes:
+      - ./infra/psql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./infra/volumes/psql/data:/var/lib/postgresql/data
+
+  redis:
+    container_name: redis_server
+    env_file:
+      - ../.env
+    restart: on-failure
+    build:
+      context: ..
+      dockerfile: ./infra/redis/Dockerfile
+    command: [ "redis-server", "--requirepass", "${REDIS_PASSWORD}" ]
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./infra/volumes/redis/data:/data"
+
+  snatcher:
+    container_name: snatcher_backend
+    env_file:
+      - ../.env
+    restart: always
+    build:
+      context: ..
+      dockerfile: ./infra/snatcher/Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgresql
+      - redis
+      - airflow
+    volumes:
+      - "../src/snatcher:/app/src"
+
+  airflow:
+    container_name: snatcher_airflow
+    env_file:
+      - ../.env
+    restart: on-failure
+    depends_on:
+      - postgresql
+      - redis
+    build:
+      context: ..
+      dockerfile: ./infra/airflow/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./src/airflow/dags:/opt/airflow/dags"
+      - "./infra/volumes/airflow/data:/opt/airflow/logs"
