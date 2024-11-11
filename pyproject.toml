@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "stock-snatcher"
+version = "0.1.0"
+description = ""
+authors = ["Leon Balloni"]
+license = "GNU"
+readme = "README.md"
+packages = [
+    {include = "src"},
+    {include = "tests"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+cryptography = "^43.0.3"
+fastapi = "^0.115.4"
+pydantic = "^2.9.2"
+sqlalchemy = "^2.0.36"
+pydantic-settings = "^2.6.1"
+loguru = "^0.7.2"
+black = "^24.10.0"
+redis = "^5.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+python_files = ["tests/*", "test_*.py", "*_test.py", "tests/integration/*.py", "tests/unitary/*.py"]
+# https://pypi.org/project/pytest-asyncio/
+asyncio_mode = "auto"
+addopts = "-p no:warnings"
+testpaths = [
+    "tests",
+    "integration",
+    "unitary",
+]
+pythonpath = "src"
+log_cli= "true"
+log_cli_level = "INFO"
