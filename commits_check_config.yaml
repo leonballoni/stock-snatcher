@@ -1,0 +1,16 @@
+additional_commands:
+  database: "^database(\\(.+\\))?:"
+  design: "^design(\\(.+\\))?:"
+  security: "^security(\\(.+\\))?:"
+  prompt: "^prompt(\\(.+\\))?:"
+  merge: "^merge(\\(.+\\))?:"
+  migration: "^migration(\\(.+\\))?:"
+
+
+additional_emojis:
+  database: " 🗃️ "
+  design: " 🎨 "
+  security: " 🛡️ "
+  merge: " ⛓️ "
+  prompt: " 🤖 "
+  migration: " 🔁 "

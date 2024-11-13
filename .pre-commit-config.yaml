@@ -1,0 +1,21 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml
+        stages: [pre-push]
+      - id: end-of-file-fixer
+        stages: [pre-push]
+      - id: trailing-whitespace
+        stages: [pre-push]
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black
+        stages: [pre-push]
+  - repo: https://github.com/AliYmn/conventional-commits-check
+    rev: v2.0.5  # Use the latest release version
+    hooks:
+      - id: conventional-commits-check
+        stages: [commit-msg]
+        # args: ["--emoji-disabled"]  # Add this argument to disable emojis
