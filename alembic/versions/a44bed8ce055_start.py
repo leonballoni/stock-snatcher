@@ -1,8 +1,8 @@
-"""[Texto sobre migração]
+"""start
 
-Revision ID: b2c4314ef7a9
+Revision ID: a44bed8ce055
 Revises: 
-Create Date: 2024-11-13 03:25:07.185259
+Create Date: 2024-11-13 16:17:44.833809
 
 """
 
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "b2c4314ef7a9"
+revision: str = "a44bed8ce055"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None

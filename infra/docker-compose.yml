@@ -1,24 +1,38 @@
-version: '3.9'
-
 services:
+# Removido para garantir melhor experiência no teste da app.
+#  postgresql:
+#    container_name: psql_data
+#    env_file:
+#      - ../.env
+#    restart: on-failure
+#    build:
+#      context: ..
+#      dockerfile: ./infra/psql_db/Dockerfile
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      - POSTGRES_USER=${PSQL_USER}
+#      - POSTGRES_PASSWORD=${PSQL_PWD}
+#      - POSTGRES_DB=${PSQL_DB}
+#    volumes:
+#      - ../infra/psql_db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
-  postgresql:
-    container_name: snatcher_psql_db
+  snatcher:
+    container_name: snatcher_backend
     env_file:
       - ../.env
-    restart: on-failure
+    restart: always
     build:
       context: ..
-      dockerfile: ./infra/psql_db/Dockerfile
+      dockerfile: ./infra/snatcher/Dockerfile
     ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER="${PSQL_USER}"
-      - POSTGRES_PASSWORD="${PSQL_PWD}"
-      - POSTGRES_DB="${PSQL_DB}"
+      - "8000:8000"
+    depends_on:
+      - postgresql
+      - redis
+#      - airflow
     volumes:
-      - ./infra/psql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./infra/volumes/psql/data:/var/lib/postgresql/data
+      - "./:/app/src"
 
   redis:
     container_name: redis_server
@@ -34,36 +48,24 @@ services:
     volumes:
       - "./infra/volumes/redis/data:/data"
 
-  snatcher:
-    container_name: snatcher_backend
-    env_file:
-      - ../.env
-    restart: always
-    build:
-      context: ..
-      dockerfile: ./infra/snatcher/Dockerfile
-    ports:
-      - "8000:8000"
-    depends_on:
-      - postgresql
-      - redis
-      - airflow
-    volumes:
-      - "../src/snatcher:/app/src"
 
-  airflow:
-    container_name: snatcher_airflow
-    env_file:
-      - ../.env
-    restart: on-failure
-    depends_on:
-      - postgresql
-      - redis
-    build:
-      context: ..
-      dockerfile: ./infra/airflow/Dockerfile
-    ports:
-      - "8080:8080"
-    volumes:
-      - "./src/airflow/dags:/opt/airflow/dags"
-      - "./infra/volumes/airflow/data:/opt/airflow/logs"
+#  airflow:
+#    container_name: snatcher_airflow
+#    env_file:
+#      - ../.env
+#    restart: on-failure
+#    depends_on:
+#      - postgresql
+#      - redis
+#    build:
+#      context: ..
+#      dockerfile: ./infra/airflow/Dockerfile
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - "./src/airflow/dags:/opt/airflow/dags"
+#      - "./infra/volumes/airflow/data:/opt/airflow/logs"
+
+volumes:
+  psql_data:
+    driver: local

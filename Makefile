@@ -47,6 +47,10 @@ compose-run-logs:
 compose-run:
 	docker-compose -d -f infra/docker-compose.yml --env-file .env up --build
 
+.PHONY: migrate
+migrate:
+	alembic upgrade head
+
 .PHONY: run
 run:
 	$(PYTHON) src/snatcher/main.py
