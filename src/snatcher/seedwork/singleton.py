@@ -1,6 +1,7 @@
 class BaseSingleton(type):
     """Substitui o metodo __call__ e adiciona uma conferência se a classe já foi gerada.
-    Caso já tenha sido gerada, ele reutiliza a mesma instância evitando desperdício de memória
+    Caso já tenha sido gerada, é reutilizado a mesma instância evitando desperdício de memória
+    (padrão criacional)
     """
 
     _instances = {}
