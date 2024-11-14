@@ -14,7 +14,7 @@ O projeto tem como principais objetivos:
 1. Superar sistemas de segurança que limitam a ação de bots em sites é um desafio novo, mas motivador.
 2. Identificamos que o Market Watch é protegido pela Datadome, uma empresa que usa algoritmos avançados, inclusive de machine learning, para bloquear bots.
 3. A combinação de diversas ferramentas e o conhecimento compartilhado pela comunidade são essenciais para o desenvolvimento contínuo deste projeto.
-4. Estamos explorando ferramentas como **Selenium**, **Scrapy**, e **BeautifulSoup**, além de técnicas de proxying, para reduzir a chance de detecção.
+4. Tenho explorado as ferramentas  **Selenium**, **Scrapy**, e **BeautifulSoup**, além de técnicas de proxying, para reduzir a chance de detecção.
 5. Este projeto tem como objetivo aprimorar o conhecimento em ferramentas de scraping e técnicas de contorno de bloqueios.
 
 ## Estrutura do Projeto
@@ -23,18 +23,33 @@ O desenvolvimento do projeto segue a estrutura abaixo:
 
 1. **Serviços na pasta `src/`** – núcleo das operações:
    - `snatcher`: backend da API.
-   - `airflow`: batching diário para atualização dos dados de ações. (Versão futura)
+
+[//]: # (   - `airflow`: batching diário para atualização dos dados de ações. &#40;Versão futura&#41;)
 
 2. **Serviços na pasta `infra/`** – infraestrutura do projeto:
    - `snatcher`
    - `redis`
    - `postgresql`
 
-3. **Desenvolvimentos Futuros**:
+3. **Desenvolvido** :
+   - Rotas de GET e POST Stocks
+   - Contratos de entrada e saída do StockModel
+   - Caching com Redis 
+   - PostgresDB em AWS e Docker
+   - Simples comando habilita todo o serviço
+   - Logs de Auditoria
+
+4. **Desenvolvimentos pendentes (por prioridade)** :
+   - Finalizar processo de estudo e extração eficiente dos dados da Market Watch
+   - Aprimorar algoritmos para contornar o sistema DataDome.
+   - Integrar de forma coesa o extrator com MW e Polygon
+
+5. **Desenvolvimento futuro** 
+   - Logs de monitoramento (Paper trail, etc)
+   - Acrescentar testes unitários e de integração para adequar cobertura (80%)
    - Automatizar a coleta de dados com Airflow.
    - Adicionar mais funcionalidades ao serviço de recuperação de dados.
-   - Implementar relatórios visuais (Grafana ou Metabase).
-   - Aprimorar algoritmos para contornar o sistema DataDome.
+   - Implementar relatórios visuais de Logs e Dados(Grafana ou Metabase).
 
 ## Guia Rápido de Início
 
@@ -49,23 +64,27 @@ O desenvolvimento do projeto segue a estrutura abaixo:
 1. **Inicializar via Makefile**  
    Use o Makefile para simplificar a inicialização dos serviços.
 
-#### Para rodar localmente no código
+#### Para rodar em sua máquina diretamente
 
 1. Configure o ambiente:
    ```shell
    make setup
    ```
+* seguido de 
+  ```shell
+  make run 
+  ```
 
 #### Para rodar via Docker
 
-2. Inicie o Dockerfile (adicione `-logs` para exibir logs no terminal):
+2. Inicie o Dockerfile (remova sufixo `-logs` para operar no modo detached):
    ```shell
    make docker-run-logs 
    ```
 
 #### Para rodar via Docker Compose (inclui todos os serviços)
 
-3. Inicie o Compose (adicione `-logs` para exibir logs no terminal):
+3. Inicie o Compose (remova sufixo `-logs` para operar no modo detached):
    ```shell
    make compose-run-logs
    ```
