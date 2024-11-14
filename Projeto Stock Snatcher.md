@@ -39,6 +39,17 @@ contém
   "volume": 26122646
 }
 
+* https://www.marketwatch.com/tools/markets/stocks/country/united-states
+> class=table table-condensed (estrutura da tabela presente nesta class)
+> <thead> contém name, exchange, sector
+> <tbody> lista ordenada de value do name, exchange e sector
+> class="pagination" (contém o catálogo de itens) [1-102]
+
+* https://www.marketwatch.com/investing/stock/aapl
+> class="table table--primary no-heading c2" -> conteúdo de performance
+> class="element element--table overflow--table Competitors" -> Conteúdo de competidores
+
+
 
 avaliar:
 https://api.wsj.net/api/dylan/quotes/v2/comp/quoteByDialect?dialect=official&needed=CompositeTrading|BluegrassChannels&MaxInstrumentMatches=1&accept=application/json&EntitlementToken=cecc4267a0194af89ca343805a3e57af&ckey=cecc4267a0&dialects=Charting&id=UnitInvestmentTrust-BR-SANB11

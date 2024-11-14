@@ -70,7 +70,7 @@ O desenvolvimento do projeto segue a estrutura abaixo:
    ```shell
    make setup
    ```
-* seguido de 
+* seguido de (que pode ser reproduzido executando o arquivo main.py na pasta src/snatcher)
   ```shell
   make run 
   ```
@@ -99,16 +99,6 @@ O desenvolvimento do projeto segue a estrutura abaixo:
 > **Atenção**: Certifique-se de configurar o arquivo `.env` com base no `.env_example`.
 
 O serviço estará disponível na porta **8000** para containers e na porta **8001** para o setup local.
-
-## TODO
-
-Futuras melhorias e implementações para explorar a escalabilidade do projeto:
-
-- Implementar paginação e filtragem dinâmica.
-- Desenvolver uma pipeline de extração automatizada com Airflow e definir periodicidade ideal.
-- Migrar serviços para um cluster Kubernetes (K8S).
-- Adicionar logs de monitoramento (e de auditoria) – PaperTrail.
-
 
 
 ## Referências
