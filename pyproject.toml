@@ -6,7 +6,7 @@ authors = ["Leon Balloni"]
 license = "GNU"
 readme = "README.md"
 packages = [
-    {include = "src"},
+    {include = "src/snatcher/"},
     {include = "tests"}
 ]
 

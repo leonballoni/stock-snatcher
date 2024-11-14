@@ -7,6 +7,9 @@ POETRY := poetry
 PYTHON := $(POETRY) run python
 SERVICE_NAME := $(shell git remote get-url origin | sed 's/.*\/\([^\/]*\)\.git/\1/')
 RANDOM_NUM := $(shell echo $$((RANDOM)))
+DATE := $(shell date +%Y-%m-%d_%H-%M-%S)
+BUILD_DIR := build_$(DATE)
+
 # Default target
 .PHONY: help
 help:
@@ -18,6 +21,8 @@ help:
 	@echo " docker-run-log     Run the application using Docker with Logs"
 	@echo " compose-run        Run the application with Compose"
 	@echo " compose-run-logs   Run the application with Compose and show logs"
+	@echo " new-migration		Run New migration"
+	@echo " migrate				Run last generated migration"
 	@echo " update       	    Update dependencies using Poetry"
 	@echo " lock         	    Generate Poetry lock file"
 	@echo " test         	    Run tests"
@@ -38,7 +43,6 @@ docker-run-log:
 	docker build --pull --rm -f infra/snatcher/Dockerfile -t ${SERVICE_NAME}:latest .
 	docker run --name $(SERVICE_NAME)_$(RANDOM_NUM) -p 8000:8000 $(SERVICE_NAME):latest
 
-
 .PHONY: compose-run-logs
 compose-run-logs:
 	docker-compose -f infra/docker-compose.yml --env-file .env up --build
@@ -50,6 +54,10 @@ compose-run:
 .PHONY: migrate
 migrate:
 	alembic upgrade head
+
+.PHONY: new-migration
+new-migration:
+	alembic revision --autogenerate -m 'Nova migração de ${SERVICE_NAME} em  ${DATE}'
 
 .PHONY: run
 run:
