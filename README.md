@@ -61,7 +61,7 @@ O projeto tem como principais objetivos:
 
 > **Atenção**: Certifique-se de configurar o arquivo `.env` com base no `.env_example`.
 
-O serviço estará disponível na porta **8000** para containers e na porta **8001** para o setup local.
+O serviço estará disponível na porta **8000** para containers e em máquina
 
 
 ## Análise do Desafio
