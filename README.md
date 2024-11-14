@@ -84,7 +84,7 @@ O desenvolvimento do projeto segue a estrutura abaixo:
 2. **Serviços na pasta `infra/`** – infraestrutura do projeto:
    - `snatcher`
    - `redis`
-   - `postgresql`
+   - `postgresql` -> Agora operando por RDS da AWS
 
 3. **Desenvolvido** :
    - Rotas de GET e POST Stocks
