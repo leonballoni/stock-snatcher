@@ -49,7 +49,7 @@ compose-run-logs:
 
 .PHONY: compose-run
 compose-run:
-	docker-compose -d -f infra/docker-compose.yml --env-file .env up --build
+	docker-compose -f infra/docker-compose.yml --env-file .env up -d --build 
 
 .PHONY: migrate
 migrate:
