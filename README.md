@@ -9,6 +9,61 @@ O projeto tem como principais objetivos:
 - Capturar informações do mercado e simular cenários de compra e venda de ativos.
 - Explorar técnicas eficientes de scraping e construir uma pipeline robusta para coleta de dados, com otimizações como caching e logging.
 
+## Guia Rápido de Início
+
+### Requisitos
+
+#### Ferramentas Necessárias:
+- [Python 3.10+](https://www.python.org/)
+- [Poetry](https://python-poetry.org/)
+
+### Passo a Passo
+
+1. **Inicializar via Makefile**  
+   Use o Makefile para simplificar a inicialização dos serviços.
+
+#### Para rodar em sua máquina diretamente
+
+1. Configure o ambiente:
+   ```shell
+   make setup
+   ```
+* seguido de (que pode ser reproduzido executando o arquivo main.py na pasta src/snatcher)
+  ```shell
+  make run 
+  ```
+
+#### Para rodar via Docker
+
+2. Inicie o Dockerfile (remova sufixo `-logs` para operar no modo detached):
+   ```shell
+   make docker-run-logs 
+   ```
+
+#### Para rodar via Docker Compose (inclui todos os serviços)
+
+3. Inicie o Compose (remova sufixo `-logs` para operar no modo detached):
+   ```shell
+   make compose-run-logs
+   ```
+
+#### SWAGGER Docs
+4. Podem ser acessados via rota:
+
+> URL:PORT/docs ou URL:PORT/api/v1/docs
+
+#### Testes
+
+5. Execute os testes de cobertura (TO BE FINISHED - TBF):
+   ```shell
+   make test-coverage
+   ```
+
+> **Atenção**: Certifique-se de configurar o arquivo `.env` com base no `.env_example`.
+
+O serviço estará disponível na porta **8000** para containers e na porta **8001** para o setup local.
+
+
 ## Análise do Desafio
 
 1. Superar sistemas de segurança que limitam a ação de bots em sites é um desafio novo, mas motivador.
@@ -50,56 +105,6 @@ O desenvolvimento do projeto segue a estrutura abaixo:
    - Automatizar a coleta de dados com Airflow.
    - Adicionar mais funcionalidades ao serviço de recuperação de dados.
    - Implementar relatórios visuais de Logs e Dados(Grafana ou Metabase).
-
-## Guia Rápido de Início
-
-### Requisitos
-
-#### Ferramentas Necessárias:
-- [Python 3.10+](https://www.python.org/)
-- [Poetry](https://python-poetry.org/)
-
-### Passo a Passo
-
-1. **Inicializar via Makefile**  
-   Use o Makefile para simplificar a inicialização dos serviços.
-
-#### Para rodar em sua máquina diretamente
-
-1. Configure o ambiente:
-   ```shell
-   make setup
-   ```
-* seguido de (que pode ser reproduzido executando o arquivo main.py na pasta src/snatcher)
-  ```shell
-  make run 
-  ```
-
-#### Para rodar via Docker
-
-2. Inicie o Dockerfile (remova sufixo `-logs` para operar no modo detached):
-   ```shell
-   make docker-run-logs 
-   ```
-
-#### Para rodar via Docker Compose (inclui todos os serviços)
-
-3. Inicie o Compose (remova sufixo `-logs` para operar no modo detached):
-   ```shell
-   make compose-run-logs
-   ```
-
-#### Testes
-
-4. Execute os testes de cobertura (TO BE FINISHED - TBF):
-   ```shell
-   make test-coverage
-   ```
-
-> **Atenção**: Certifique-se de configurar o arquivo `.env` com base no `.env_example`.
-
-O serviço estará disponível na porta **8000** para containers e na porta **8001** para o setup local.
-
 
 ## Referências
 
